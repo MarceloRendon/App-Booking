@@ -3,7 +3,7 @@
 const Hola = () => {
 
     return (
-        <h1>HOlA</h1>
+        <h1>HOLA</h1>
     );
 };
 
