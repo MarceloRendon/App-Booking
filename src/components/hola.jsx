@@ -4,7 +4,7 @@ const Hola = () => {
 
     return (
         <div className="bg-red-500">
-            <h1>HOLA</h1>
+            <h1>HOLA PORQUE NO ME MANDA UNO WASSA</h1>
         </div>
     );
 };
