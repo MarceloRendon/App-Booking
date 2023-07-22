@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const DM_Button = () => {
+const COM_DMButton = () => {
 
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.theme === "dark" ||
@@ -38,4 +38,4 @@ const DM_Button = () => {
 
 };
 
-export default DM_Button;
+export default COM_DMButton;
