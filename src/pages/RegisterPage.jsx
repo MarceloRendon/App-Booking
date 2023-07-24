@@ -9,14 +9,22 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     function registerUser(ev){
         ev.preventDefault();
-        axios.get('http://localhost:4000/test');
+        try{
+            axios.post('/register', {
+                name,
+                email,
+                password
+            });
+        }catch(e){
+            alert('El registro ha fallado. Por favor intente nuevamente más tarde.');
+        }
     }
 
     return (
-    <div className="mt-4 grow flex items-center justify-around">
+    <div className="mt-32 grow flex items-center justify-around">
 
         <div className=" mb-64">
-            <h1 className="text-4xl text-center mb-4">Regístrate</h1>
+            <h1 className="text-4xl text-center mb-4 dark:text-white">Regístrate</h1>
             
             <form className="max-w-md mx-auto" onSubmit={registerUser}>
                 <input type="text" 
@@ -31,9 +39,9 @@ export default function RegisterPage() {
                     placeholder="contraseña" 
                     value={password} 
                     onChange = {ev => setPassword(ev.target.value)}/>
-                <button className="buttonLogin">Registrar</button>
-                <div className="text-center py-2 text-gray-500">
-                    ¿Ya tienes cuenta? <Link className="underline text-black" to={'/login'}>Ingresa aquí</Link>
+                <button className="buttonLogin mt-2 dark:text-white bg-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">Registrar</button>
+                <div className="text-center py-2 text-gray-500 dark:text-white">
+                    ¿Ya tienes cuenta? <Link className="underline text-black dark:text-gray-500" to={'/login'}>Ingresa aquí</Link>
                 </div>
             </form>
         </div>
