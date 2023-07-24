@@ -3,7 +3,7 @@ import COM_DMButton from './COM_DMButton'
 const COM_NavBar = () => {
     return (
 
-        <header className="p-4 dark:bg-gray-700 dark:text-white flex items-center justify-between">
+        <header className="sticky top-0 z-50 p-4 dark:bg-gray-800 dark:text-white flex items-center justify-between">
             <div className="container mx-auto">
                 <div className="flex items-center place-content-evenly">
                     <div className="p-2">
