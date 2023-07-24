@@ -1,22 +1,29 @@
 import './App.css'
-import COM_DMButton from './components/COM_DMButton'
-import COM_Footer from './components/COM_Footer'
-import COM_NavBar from './components/COM_NavBar'
 import { Router, Route, Routes } from 'react-router-dom'
+import IndexPage from './pages/IndexPage'
+import LoginPage from './pages/LoginPage'
+import Layout from './components/COM_Layout'
+import RegisterPage from './pages/RegisterPage'
 {/*<Route path="/*" element={<NotFound />} />*/}
 function App() {
 
   return (
-    <>
-      {/* NavNar */}
-      <COM_NavBar></COM_NavBar>
-      
-      {/* Filler */}
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
-      {/* Footer */}
-      <COM_Footer></COM_Footer>
-    </>
+    
+
+    <div>
+      <Routes>
+        <Route path='/' element={<Layout></Layout>}>
+            {/* INDEX PAGE */}
+            <Route index element={<IndexPage/>} />
+            {/* LOGIN PAGE*/}
+            <Route path="/login" element={<LoginPage/>}/>
+            {/* REGISTER PAGE*/}
+            <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+        </Route>
+      </Routes>
+
+    </div>
   )
 }
 
