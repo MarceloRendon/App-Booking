@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [redirect, setRedirect] = useState(false);
     async function loginUser(ev) {
         ev.preventDefault();
         try{
@@ -12,9 +13,15 @@ export default function LoginPage() {
                 email,
                 password
             });
+            //alert('Login exitoso');
+            setRedirect(true);
         }catch(e){
             alert('El inicio de sesión ha fallado.');
         }
+    }
+
+    if(redirect){
+        return <Navigate to={'/'}/>
     }
 
     return (
