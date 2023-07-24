@@ -9,18 +9,22 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     function registerUser(ev){
         ev.preventDefault();
-        axios.post('/register', {
-            name,
-            email,
-            password,
-        });
+        try{
+            axios.post('/register', {
+                name,
+                email,
+                password
+            });
+        }catch(e){
+            alert('El registro ha fallado. Por favor intente nuevamente más tarde.');
+        }
     }
 
     return (
     <div className="mt-32 grow flex items-center justify-around">
 
         <div className=" mb-64">
-            <h1 className="text-4xl text-center mb-4">Regístrate</h1>
+            <h1 className="text-4xl text-center mb-4 dark:text-white">Regístrate</h1>
             
             <form className="max-w-md mx-auto" onSubmit={registerUser}>
                 <input type="text" 

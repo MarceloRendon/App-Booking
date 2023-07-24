@@ -9,6 +9,9 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:4000/'
 
+//Transport cookies
+axios.defaults.withCredentials = true;
+
 function App() {
 
   return (

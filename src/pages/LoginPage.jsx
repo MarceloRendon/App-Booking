@@ -5,12 +5,16 @@ import axios from "axios";
 export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    function registerUser(ev) {
+    async function loginUser(ev) {
         ev.preventDefault();
-        axios.post('/login', {
-            email,
-            password,
-        });
+        try{
+            await axios.post('/login', {
+                email,
+                password
+            });
+        }catch(e){
+            alert('El inicio de sesión ha fallado.');
+        }
     }
 
     return (
@@ -19,7 +23,7 @@ export default function LoginPage() {
             <div className=" mb-64">
                 <h1 className="text-4xl text-center mb-16 dark:text-white">Inicio de sesión</h1>
 
-                <form className="max-w-md mx-auto" onSubmit={registerUser}>
+                <form className="max-w-md mx-auto" onSubmit={loginUser}>
                     <input type="email"
                         placeholder="mail@mail.com"
                         value={email}
