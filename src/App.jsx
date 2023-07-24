@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Hola from './components/hola'
-
+import COM_DMButton from './components/COM_DMButton'
+import COM_Footer from './components/COM_Footer'
+import COM_NavBar from './components/COM_NavBar'
+import { Router, Route, Routes } from 'react-router-dom'
+{/*<Route path="/*" element={<NotFound />} />*/}
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-    <Hola></Hola>
+      {/* NavNar */}
+      <COM_NavBar></COM_NavBar>
+      
+      {/* Filler */}
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+      {/* Footer */}
+      <COM_Footer></COM_Footer>
     </>
   )
 }
