@@ -3,7 +3,7 @@ const COM_Footer = () => {
 
     return (
 
-        <footer className="bg-customColor3 dark:bg-gray-800">
+        <footer className="bg-lightPrimary dark:bg-gray-800">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
                     {/* left logo */}

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import COM_DMButton from './COM_DMButton';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ const COM_NavBar = () => {
 
     return (
 
-        <header className="bg-secondary sticky top-0 z-50 p-1 dark:bg-gray-800 dark:text-white flex items-center justify-between rounded-lg border dark:border-gray-800">
+        <header className="bg-lightcustomColor3 sticky top-0 z-50 p-1 dark:bg-gray-800 dark:text-white flex items-center justify-between rounded-lg border dark:border-gray-800">
             <div className="container mx-auto">
                 <div className="flex items-center place-content-evenly">
                     <div className="p-2 hover:border rounded-lg dark:border-gray-600">
