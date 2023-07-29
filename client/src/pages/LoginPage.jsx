@@ -39,7 +39,7 @@ export default function LoginPage() {
                         placeholder="Contraseña"
                         value={password}
                         onChange={ev => setPassword(ev.target.value)} />
-                    <button className="buttonLogin mt-2 dark:text-white bg-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">Iniciar sesión</button>
+                    <button className="buttonLogin mt-2 dark:text-white hover:bg-bestColor7 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">Iniciar sesión</button>
                     <div className="text-center py-2 text-gray-500 dark:text-white">
                         ¿No tienes cuenta aún? <Link className="underline text-black dark:text-gray-500" to={'/register'}>Regístrate aquí</Link>
                     </div>
