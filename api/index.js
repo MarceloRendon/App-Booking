@@ -26,7 +26,7 @@ app.use(cors({
 }))
 
 //MongoBD connect
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(process.env.MONGO_URL_DOS)
 
 
 //URLs API
