@@ -14,6 +14,13 @@ export default {
         customColor3: '#FFB562',
         customColor4: '#F87474',
 
+        lightPrimary: '#3A98B9',
+        lightSecondary: '#FFF1DC',
+        lightcustomColor3: '#E8D5C4',
+        lightcustomColor4: '#EEEEEE',
+
+
+
       },
     },
   },
