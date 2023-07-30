@@ -27,7 +27,7 @@ app.use(cors({
 }))
 
 //MongoBD connect
-mongoose.connect(process.env.MONGO_URL_DOS)
+mongoose.connect(process.env.MONGO_URL)
 
 
 //URLs API
@@ -70,7 +70,7 @@ app.post('/login', async (req,res) => {
                 //secure y samesite en esa configuracion, permite usar diferentes dominios
                 if(err) throw err;
                 res.cookie('token', token, { 
-                    secure: false,
+                    secure: true,
                     sameSite: 'none'
                   }).json(userDoc);
             });
@@ -114,6 +114,10 @@ app.get('/profile', (req, res) => {
     } else {
         res.json(null);
     }
+});
+
+app.post('/logout', (req,res) => {
+    res.cookie('token', '').json(true);
 });
 
 app.listen(4000);
