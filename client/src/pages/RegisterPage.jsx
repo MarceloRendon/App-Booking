@@ -15,6 +15,7 @@ export default function RegisterPage() {
                 email,
                 password
             });
+            alert('Registro exitoso');
         }catch(e){
             alert('El registro ha fallado. Por favor intente nuevamente más tarde.');
         }
@@ -39,7 +40,7 @@ export default function RegisterPage() {
                     placeholder="contraseña" 
                     value={password} 
                     onChange = {ev => setPassword(ev.target.value)}/>
-                <button className="buttonLogin mt-2 dark:text-white bg-gray-800 hover:bg-gray-500 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">Registrar</button>
+                <button className="buttonLogin mt-2 dark:text-white bg-gray-800 hover:bg-bestColor7 hover:text-white focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 dark:focus:ring-gray-700 dark:border-gray-700">Registrar</button>
                 <div className="text-center py-2 text-gray-500 dark:text-white">
                     ¿Ya tienes cuenta? <Link className="underline text-black dark:text-gray-500" to={'/login'}>Ingresa aquí</Link>
                 </div>
