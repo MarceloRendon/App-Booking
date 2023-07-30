@@ -15,6 +15,7 @@ export default function RegisterPage() {
                 email,
                 password
             });
+            alert('Registro exitoso');
         }catch(e){
             alert('El registro ha fallado. Por favor intente nuevamente más tarde.');
         }
