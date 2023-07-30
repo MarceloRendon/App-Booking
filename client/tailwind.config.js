@@ -25,7 +25,10 @@ export default {
         bestColor4: '#EEEEEE',
         bestColor5: '#08D9D6',
         bestColor6: '#252A34',
-        bestColor7: '#FF2E63',
+        bestColor7: {
+          100: '#FF2E63',
+          200: '#cc244f',
+        },
 
 
 

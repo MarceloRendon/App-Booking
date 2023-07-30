@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage'
 {/*<Route path="/*" element={<NotFound />} />*/}
 import axios from 'axios'
 import { UserContextProvider } from './UserContext'
+import AccountPage from './pages/AccountPage'
 
 
 axios.defaults.baseURL = 'http://localhost:4000/'
@@ -32,6 +33,8 @@ function App() {
               <Route path="/login" element={<LoginPage/>}/>
               {/* REGISTER PAGE*/}
               <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
+              {/* ACCOUNT PAGE*/}
+              <Route path='/account/:subpage?' element={<AccountPage></AccountPage>}></Route>
           </Route>
         </Routes>
       </UserContextProvider>
