@@ -35,6 +35,8 @@ function App() {
               <Route path='/register' element={<RegisterPage></RegisterPage>}></Route>
               {/* ACCOUNT PAGE*/}
               <Route path='/account/:subpage?' element={<AccountPage></AccountPage>}></Route>
+              {/* PLACES PAGE*/}
+              <Route path='/account/:subpage/:action' element={<AccountPage></AccountPage>}></Route>
           </Route>
         </Routes>
       </UserContextProvider>

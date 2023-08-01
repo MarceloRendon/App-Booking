@@ -10,6 +10,9 @@ const User = require('./models/User.js');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
+//image downloader
+const download = require('image-downloader');
+
 //bcrypt
 const bcrypt = require('bcryptjs');
 const bcryptSalt = bcrypt.genSaltSync(10); //Salt
@@ -21,6 +24,8 @@ const jwtSecret = 'lk1j4oiawSADUIH83rja';
 
 app.use(express.json());
 app.use(cookieParser());
+//Show images from /uploads
+app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(cors({
     credentials: true,
     origin: 'http://localhost:5173',
@@ -31,54 +36,54 @@ mongoose.connect(process.env.MONGO_URL)
 
 
 //URLs API
-app.get('/test', (req,res) => {
+app.get('/test', (req, res) => {
     res.json('test ok');
 });
 
-app.post('/register', async (req,res) => {
-    const {name, email, password} = req.body;
+app.post('/register', async (req, res) => {
+    const { name, email, password } = req.body;
 
-    try{
+    try {
         // User = module
         //userDoc = info
         const userDoc = await User.create({
             name,
             email,
-            password:bcrypt.hashSync(password, bcryptSalt),
+            password: bcrypt.hashSync(password, bcryptSalt),
         });
 
-        res.json({userDoc});
-    }catch (e){
+        res.json({ userDoc });
+    } catch (e) {
         res.status(422).json(e);
     }
 
 })
 
-app.post('/login', async (req,res) => {
-    const {email, password} = req.body;
-    const userDoc = await User.findOne({email});
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const userDoc = await User.findOne({ email });
 
-    if(userDoc){
-        const passOk = bcrypt.compareSync(password, userDoc.password);  
-        
-        if(passOk){
+    if (userDoc) {
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+
+        if (passOk) {
             jwt.sign({
-                email:userDoc.email, 
-                id:userDoc._id
+                email: userDoc.email,
+                id: userDoc._id
             }, jwtSecret, {}, (err, token) => {
                 //Cookie session token
                 //secure y samesite en esa configuracion, permite usar diferentes dominios
-                if(err) throw err;
-                res.cookie('token', token, { 
+                if (err) throw err;
+                res.cookie('token', token, {
                     secure: true,
                     sameSite: 'none'
-                  }).json(userDoc);
+                }).json(userDoc);
             });
-        }else{
+        } else {
             res.status(422).json('password NOT ok')
         }
 
-    }else{
+    } else {
         res.json('not found')
     }
 
@@ -116,8 +121,22 @@ app.get('/profile', (req, res) => {
     }
 });
 
-app.post('/logout', (req,res) => {
+app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
+});
+
+app.post('/upload-by-link', async (req, res) => {
+    const { link } = req.body;
+    const newName = 'img' + Date.now() + '.jpg'
+    await download.image({
+        url: link,
+        dest: __dirname + '/uploads/' + newName,
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        }
+    });
+
+    res.json(newName);
 });
 
 app.listen(4000);
