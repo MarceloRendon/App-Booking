@@ -16,4 +16,5 @@ En la terminal del directorio api, escribimos node index.js  Con eso, se levanta
     <li>dotenv</li>
     <li>bcryptjs</li>
     <li>jsonwebtoken</li>
+    <li>image-downloader</li>
 </ul>
