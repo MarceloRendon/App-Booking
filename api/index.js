@@ -13,6 +13,12 @@ require('dotenv').config();
 //image downloader
 const download = require('image-downloader');
 
+// multer
+const multer = require('multer');
+
+// fs file system - rename files on the server
+const fs = require('fs')
+
 //bcrypt
 const bcrypt = require('bcryptjs');
 const bcryptSalt = bcrypt.genSaltSync(10); //Salt
@@ -31,14 +37,25 @@ app.use(cors({
     origin: 'http://localhost:5173',
 }))
 
-//MongoBD connect
+/*
+    MongoBD connect, MONGO_URL is defined in .env file */
 mongoose.connect(process.env.MONGO_URL)
 
+/* 
+    API URL /test, 
+    this is to check if conection to api is fine */
 
-//URLs API
 app.get('/test', (req, res) => {
     res.json('test ok');
 });
+
+/* 
+    API URL /register,
+    obtains data set by form register and gives as a response json document to then be uploaded to MongoDB
+    
+    - name: Full name of the user.
+    - email: Email of the user.
+    - password: Encrypted password using bcrypt */
 
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
@@ -58,6 +75,14 @@ app.post('/register', async (req, res) => {
     }
 
 })
+
+/* 
+    API URL /login,
+    obtains data set by form login and verifies that password and user are correct to validate session,
+    user is given a session token using jsonwebtoken.
+
+    - email: Email of the user.
+    - password: Encrypted password using bcrypt */
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
@@ -88,24 +113,14 @@ app.post('/login', async (req, res) => {
     }
 
 })
-/** 
-app.get('/profile', (req,res) => {
-    const {token} = req.cookies;
-    if (token){
-        jwt.verify(token, jwtSecret, {}, async (err, userData) => {
 
-            if (err) throw err;
-            const {name, email, _id} = await User.findById(userData.id);
-            res.json({name, email, _id});
+/* 
+    API URL /profile,
+    obtains data from the session token to give information to user UI.
 
-        });
-    }else {
-        res.json(null);
-    }
-    res.json({token})
-})
-
-*/
+    - name: Name of the user.
+    - email: Email of the user.
+    - _id: ID of the user */
 
 app.get('/profile', (req, res) => {
     const { token } = req.cookies;
@@ -121,13 +136,22 @@ app.get('/profile', (req, res) => {
     }
 });
 
+/* 
+    API URL /logout,
+    closes cookie session. */
+
 app.post('/logout', (req, res) => {
     res.cookie('token', '').json(true);
 });
 
+/* 
+    API URL /upload-by-link,
+    Obtains image sent by user through add new place form using upload by link option, 
+    it crawls using image-downloader. */
+
 app.post('/upload-by-link', async (req, res) => {
     const { link } = req.body;
-    const newName = 'img' + Date.now() + '.jpg'
+    const newName = 'img' + Date.now() + '.jpg';
     await download.image({
         url: link,
         dest: __dirname + '/uploads/' + newName,
@@ -137,6 +161,34 @@ app.post('/upload-by-link', async (req, res) => {
     });
 
     res.json(newName);
+});
+
+/* 
+    API URL /upload,
+    Obtains image sent by user through add new place form by pressing upload, 
+    it works by using multer. */
+
+const photosMiddleware = multer({ dest: 'uploads/' });
+
+/* 
+    photosMiddleware.array(
+                            name defined in function uploadPhoto at PlacesPage section data.append,
+                            an arbitary number of pictures that user uploads ex:100 ) */
+
+app.post('/upload', photosMiddleware.array('photos', 100), (req, res) => {
+    const uploadedFiles = [];
+
+    for (let i = 0; i < req.files.length; i++) {
+        const { path, originalname } = req.files[i];
+        const parts = originalname.split('.');
+        const ext = parts[parts.length - 1];
+        const newPath = path + '.' + ext;
+
+        fs.renameSync(path, newPath);
+        // Windows works with \\, Mac and Linux might work with /
+        uploadedFiles.push(newPath.replace('uploads\\',''));
+    }
+    res.json(uploadedFiles);
 });
 
 app.listen(4000);
