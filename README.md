@@ -17,4 +17,5 @@ En la terminal del directorio api, escribimos node index.js  Con eso, se levanta
     <li>bcryptjs</li>
     <li>jsonwebtoken</li>
     <li>image-downloader</li>
+    <li>multer</li>
 </ul>
